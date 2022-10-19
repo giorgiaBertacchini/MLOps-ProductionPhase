@@ -1,0 +1,6 @@
+pybind11
+cppimport
+jupyter
+numpy
+scikit-learn==0.24.2
+matplotlib==3.3.3
