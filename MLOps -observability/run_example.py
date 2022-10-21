@@ -86,6 +86,10 @@ def stop_docker_compose():
     logging.info("Run docker compose down")
     os.system("docker compose down")
 
+def run_streamlit():
+    logging.info("Run streamlit")
+    os.system("streamlit run streamlit_app.py")
+
 
 def main(force: bool):
     setup_logger()
@@ -94,6 +98,7 @@ def main(force: bool):
     run_docker_compose()
     send_data_requests()
     run_monitoring_html()
+    run_streamlit()
 
 
 if __name__ == "__main__":

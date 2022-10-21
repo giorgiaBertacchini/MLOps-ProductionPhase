@@ -85,10 +85,10 @@ class MonitoringService:
 
     def __init__(self, datasets: LoadedDataset, window_size: int):
         target = "Quality"
-        numerical_features = numerical_features_names
-        features = numerical_features
-        model = RandomForestRegressor(random_state=0)
-        model.fit(datasets.references[features], datasets.references[target])
+        #numerical_features = numerical_features_names
+        #features = numerical_features
+        #model = RandomForestRegressor(random_state=0)
+        #model.fit(datasets.references[features], datasets.references[target])
         # DA AGGIUNGERE LA SEGUENTE
         #datasets.references["prediction"] = model.predict(datasets.references[features])
     
