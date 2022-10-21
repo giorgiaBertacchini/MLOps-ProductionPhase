@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 import requests
 
+f = open(os.path.join("datasets", "params.json"))
+params = json.load(f)
 
 # the encoder helps to convert NumPy types in source data to JSON-compatible types
 class NumpyEncoder(json.JSONEncoder):
@@ -62,7 +64,7 @@ def main(sleep_timeout: int) -> None:
 
     #for dataset_name in os.listdir(datasets_path):
         #production_data_path = os.path.join(datasets_path, "production.csv")
-    new_data = pd.read_csv(os.path.join(datasets_path, "production.csv"))
+    new_data = pd.read_csv(os.path.join(datasets_path, params["file_name_request_data"]))
     datasets[dataset_name] = new_data
     max_index = max(max_index, new_data.shape[0])
 
