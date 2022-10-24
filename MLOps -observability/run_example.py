@@ -121,7 +121,7 @@ def main(force: bool):
     #run_docker_compose()
     send_data_requests()
     run_monitoring_html()
-    run_streamlit()
+    #run_streamlit()
 
 
 if __name__ == "__main__":

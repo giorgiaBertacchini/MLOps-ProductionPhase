@@ -37,3 +37,8 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets: ['evidently_service.:8085']
+
+  - job_name: 'bentoml'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['bentoml.:3005']

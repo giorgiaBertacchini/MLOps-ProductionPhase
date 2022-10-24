@@ -54,3 +54,12 @@ services:
       - back-tier
       - front-tier
     restart: always
+
+  bentoml:
+    image: activities_model:x67ftp2tu676xgbm
+    ports:
+      - "3005:3005"
+    networks:
+      - back-tier
+    depends_on:
+      - grafana
