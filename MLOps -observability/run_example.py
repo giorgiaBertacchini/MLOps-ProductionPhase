@@ -122,6 +122,7 @@ def main(force: bool):
     send_data_requests()
     run_monitoring_html()
     #run_streamlit()
+    logging.info("Terminate. Attend next request...")
 
 
 if __name__ == "__main__":

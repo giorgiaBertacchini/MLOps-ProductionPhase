@@ -2,21 +2,25 @@
 <html>
 
 <head>
-    <title>Prediction</title>
+    <title>Monitoring</title>
 </head>
 
 <body>
 
-    <h1>Predition request</h1>
-    <p>Here you can request a prediction of your data.</p>
+    <h1 style="font-family:verdana;">Predition request</h1>
+    <p style="font-family:verdana;">Here you can monitor your production data.</p>
 
-    <form action="/action_page.php">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value="John"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value="Doe"><br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <ul>
+        <li>
+            <a style="font-family:verdana;" href="http://localhost:8085/data_drift_tests">Data drift tests</a>.
+        </li>
+        <li>
+            <a style="font-family:verdana;" href="http://localhost:8085/data_stability">Data_stability</a>.
+        </li>
+        <li>
+            <a style="font-family:verdana;" href="http://localhost:8085/drift_report">Report drift</a>.
+        </li>
+    </ul>
 
 </body>
 

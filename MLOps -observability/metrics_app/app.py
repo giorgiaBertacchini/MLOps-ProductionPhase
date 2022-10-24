@@ -37,21 +37,6 @@ params = json.load(f)
 # Add prometheus wsgi middleware to route /metrics requests
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})
 
-numerical_features_names = [
-    "Distance (km)", 
-    "Average Speed (km/h)", 
-    "Calories Burned", 
-    "Climb (m)", 
-    "Average Heart rate (tpm)"
-]
-
-monitors_name = [
-    "data_drift", 
-    "data_quality", 
-    "num_target_drift", 
-    "regression_performance"
-]
-
 @dataclasses.dataclass
 class MonitoringServiceOptions:
     min_reference_size: int
@@ -207,8 +192,8 @@ def configure_service():
     datasets = LoadedDataset(
         name = 'model_input_table',
         references = reference_data,
-        monitors = monitors_name,
-        column_mapping=ColumnMapping(target='Quality', numerical_features=numerical_features_names)
+        monitors = params["monitors_name"],
+        column_mapping=ColumnMapping(target = 'Quality', numerical_features = params["numerical_features_names"])
     )
     logging.info("Reference is loaded: %s rows", len(reference_data))
 
@@ -218,7 +203,7 @@ def configure_service():
 @app.route("/")
 def home():
     #return render_template(os.path.join("datasets", "drift_report.html"))
-    return render_template("drift_report.html")
+    return render_template("request_page.html")
     #return "<p>Hello, World!</p>"
 
 @app.route("/drift_report")
