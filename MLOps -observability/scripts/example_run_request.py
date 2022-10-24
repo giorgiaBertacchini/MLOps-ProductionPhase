@@ -64,7 +64,9 @@ def main(sleep_timeout: int) -> None:
 
     #for dataset_name in os.listdir(datasets_path):
         #production_data_path = os.path.join(datasets_path, "production.csv")
-    new_data = pd.read_csv(os.path.join(datasets_path, params["file_name_request_data"]))
+    new_data = pd.read_csv(os.path.join(datasets_path, params["file_name_request_data_clean"]))
+
+
     datasets[dataset_name] = new_data
     max_index = max(max_index, new_data.shape[0])
 
@@ -77,7 +79,6 @@ def main(sleep_timeout: int) -> None:
 
         print(f"Wait {sleep_timeout} seconds till the next try.")
         time.sleep(sleep_timeout)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

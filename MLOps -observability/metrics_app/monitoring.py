@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 import logging
+import json
   
 from evidently.pipeline.column_mapping import ColumnMapping
  
@@ -12,6 +13,9 @@ from evidently.test_suite import TestSuite
 from evidently.test_preset import DataQuality, DataStability
 from evidently.tests import *
 
+f = open(os.path.join("datasets", "params.json"))
+params = json.load(f)
+
 def setup_logger():
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()]
@@ -20,14 +24,16 @@ def setup_logger():
 def setup_datasets():
     logging.info("Setup datasets.")
     # TODO set the right data input to model
-    reference = pd.read_csv(os.path.join("datasets", "model_input_table.csv"))
+    reference = pd.read_csv(os.path.join("datasets", params["file_name_training_data_clean"]))
     reference.rename(columns={'Quality': 'target'}, inplace=True)
     #reference.rename(columns={'Quality': 'target'}, inplace=True)
     #reference['prediction'] = reference['target'].values + np.random.normal(0, 5, reference.shape[0])
 
     # TODO set the right input data
     #data_input = [{"Distance (km)": 26.91, "Average Speed (km/h)": 11.08, "Calories Burned": 1266, "Climb (m)": 98, "Average Heart rate (tpm)":121, 'target':5}, {"Distance (km)": 25.91, "Average Speed (km/h)": 14.08, "Calories Burned": 1276, "Climb (m)": 94, "Average Heart rate (tpm)":126, 'target':6}]
-    current = pd.read_csv(os.path.join("datasets", "current.csv"))    
+    #current = pd.read_csv(os.path.join("datasets", "current.csv"))    ATTENZIONE!!!
+    #current = pd.read_csv(os.path.join("datasets", "request_data_clean.csv"))
+    current = pd.read_csv(os.path.join("datasets", "current.csv"))
     current.rename(columns={'Quality': 'target'}, inplace=True)
     #print(current['target'])
 

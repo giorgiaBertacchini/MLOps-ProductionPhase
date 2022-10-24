@@ -30,6 +30,10 @@ from evidently.runner.loader import DataOptions
 
 app = Flask(__name__)
 
+#dataset_path = "datasets"
+f = open(os.path.join("datasets", "params.json"))
+params = json.load(f)
+
 # Add prometheus wsgi middleware to route /metrics requests
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})
 
@@ -113,13 +117,13 @@ class MonitoringService:
     def iterate(self, new_rows: pd.DataFrame):
         """Add data to current dataset for specified dataset"""
         window_size = self.window_size
-
+        
         dataset_name = 'model_input_table'
         if dataset_name in self.current:
             current_data = self.current[dataset_name].append(new_rows, ignore_index=True)
         else:
             current_data = new_rows
-
+        
         current_size = current_data.shape[0]
 
         if current_size > self.window_size:
@@ -134,7 +138,11 @@ class MonitoringService:
         current_data['Calories Burned'] = current_data['Calories Burned'].astype('int64')
         current_data['Climb (m)'] = current_data['Climb (m)'].astype('int64')
         current_data['Average Heart rate (tpm)'] = current_data['Average Heart rate (tpm)'].astype('int64')
-        current_data['Quality'] = current_data['Quality'].astype('int64')
+        current_data['Quality'] = current_data['Quality'].astype('float64')
+
+        for column in current_data.columns:
+            if column not in params["header"]:
+                current_data.drop(column, axis=1, inplace=True)
     
         current_data.to_csv(os.path.join("datasets", "current.csv"), index = False)
 
@@ -183,12 +191,13 @@ def configure_service():
         min_reference_size = 30, 
         moving_reference = False, 
         use_reference = True, 
-        window_size = 5
+        window_size = params["window_size"]
     )
     loader = DataLoader()
 
     logging.info(f"Load reference data")
-    reference_path = os.path.join("datasets", "model_input_table.csv")
+    #reference_path = os.path.join("datasets", "model_input_table.csv")
+    reference_path = os.path.join("datasets", params["file_name_training_data_clean"])
 
     #reference_data = loader.load(
     #    reference_path, 
@@ -214,9 +223,7 @@ def home():
 
 @app.route("/drift_report")
 def drift_report():
-    #return render_template(os.path.join("datasets", "drift_report.html"))
     return render_template("drift_report.html")
-    #return "<p>Hello, World!</p>"
 
 @app.route("/data_stability")
 def data_stability():

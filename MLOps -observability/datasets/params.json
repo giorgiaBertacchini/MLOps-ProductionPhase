@@ -1,3 +1,15 @@
 {
-    "file_name_request_data": "production.csv"
+    "file_name_request_data": "request_data.csv",
+    "file_name_training_data": "DATA.csv",
+    "file_name_request_data_clean": "request_data_clean.csv",
+    "file_name_training_data_clean": "training_data_clean.csv",
+    "header": [
+        "Distance (km)",
+        "Average Speed (km/h)" ,
+        "Calories Burned",
+        "Climb (m)",
+        "Average Heart rate (tpm)",
+        "Quality"
+    ],
+    "window_size": 800
 }

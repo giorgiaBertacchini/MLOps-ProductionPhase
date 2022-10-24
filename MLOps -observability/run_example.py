@@ -3,6 +3,7 @@ import logging
 import os
 import shutil
 import subprocess
+import json
 
 import pandas as pd
 
@@ -39,7 +40,29 @@ def check_dataset(
             return
 
     logging.info("Download dataset %s", dataset_name)
+
+    #return prepare_data()
     #run_script(cmd=["scripts/prepare_datasets.py"], wait=True)
+    os.system("python scripts/prepare_data.py")
+    #run_script(cmd=["scripts/prepare_data.py"], wait=True)
+
+def prepare_data():
+    dataset_path = "datasets"
+    logging.info("Generate test data for dataset.")
+    f = open(os.path.join(dataset_path, "params.json"))
+    params = json.load(f)
+
+    logging.info("Take datasets")
+    reference_data = pd.read_csv(os.path.join(dataset_path, params["file_name_training_data"]))
+    production_data = pd.read_csv(os.path.join(dataset_path, params["file_name_request_data"]))
+
+    print("reference_data\n", reference_data)
+    print("production_data\n", production_data)
+
+    logging.info("Reference dataset was created with %s rows", reference_data.shape[0])
+    logging.info("Production dataset was created with %s rows", production_data.shape[0])
+
+    return reference_data, production_data
 
 
 def download_test_datasets(force: bool):
@@ -95,10 +118,10 @@ def main(force: bool):
     setup_logger()
     check_docker_installation()
     download_test_datasets(force=force)
-    run_docker_compose()
+    #run_docker_compose()
     send_data_requests()
     run_monitoring_html()
-    #run_streamlit()
+    run_streamlit()
 
 
 if __name__ == "__main__":
