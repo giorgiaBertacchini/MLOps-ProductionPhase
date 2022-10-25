@@ -1,0 +1,12 @@
+#global:
+#  resolve_timeout: 5m
+
+route:
+  group_by: [ alertname  ]
+  receiver: webhook_receiver
+
+receivers:
+    - name: webhook_receiver
+      webhook_configs:
+        - url: 'https://webhook.site/7cf20762-f3a4-4854-b48b-305b05e5a000'
+          send_resolved: false

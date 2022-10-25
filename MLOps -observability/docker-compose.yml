@@ -28,6 +28,7 @@ services:
     image: prom/prometheus
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus_rules.yml:/etc/prometheus/prometheus_rules.yml
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -63,3 +64,14 @@ services:
       - back-tier
     depends_on:
       - grafana
+
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    #restart: unless-stopped
+    ports:
+      - "9093:9093"
+    networks:
+      - back-tier
+    volumes:
+      - ./config/alertmanager.yml:/config/alertmanager.yml
+    command: '--config.file=/config/alertmanager.yml --log.level=debug'
