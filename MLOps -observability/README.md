@@ -45,6 +45,3 @@ docker compose up
 
 Alertmanager:
 `localhost:9093`
-
-Destination
-`https://webhook.site/#!/7cf20762-f3a4-4854-b48b-305b05e5a000/6082fddd-aa51-498f-86ab-ecab808605c2/1`
