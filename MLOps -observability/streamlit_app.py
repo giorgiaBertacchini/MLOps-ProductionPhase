@@ -6,6 +6,7 @@ import pandas as pd
 import math
 import os
 import subprocess
+#import webbrowser
 
 BENTOML_URL = "http://localhost:3005/"
 EVIDENTLY_URL = "http://localhost:8085/"
@@ -46,7 +47,9 @@ if uploaded_file is not None:
     #data = json.load(f)
     # Convert JSON to String
     #y = json.dumps(data)
-
+#if st.button("evidently"):
+    #os.system("start ./metrics_app/templates/data_drift_tests.html")    
+    #webbrowser.open('file:///C:/Users/giorg/Documents/GitHub/MLOps/MLOps -observability/metrics_app/templates/data_drift_tests.html')
 
 if st.button("Predict"):
     if uploaded_file is None:

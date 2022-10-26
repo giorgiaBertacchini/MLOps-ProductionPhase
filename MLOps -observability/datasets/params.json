@@ -20,8 +20,10 @@
     ],
     "window_size": 500,
     "monitors_name": [
+        "cat_target_drift",
         "data_drift", 
         "data_quality", 
-        "num_target_drift"
+        "num_target_drift",
+        "regression_performance"
     ]
 }

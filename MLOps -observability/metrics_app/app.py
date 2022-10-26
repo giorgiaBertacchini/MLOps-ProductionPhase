@@ -28,7 +28,9 @@ from evidently.pipeline.column_mapping import ColumnMapping
 from evidently.runner.loader import DataLoader
 from evidently.runner.loader import DataOptions
 
+
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 #dataset_path = "datasets"
 f = open(os.path.join("datasets", "params.json"))
@@ -53,10 +55,13 @@ class LoadedDataset:
     column_mapping: ColumnMapping
 
 EVIDENTLY_MONITORS_MAPPING = {
+    "cat_target_drift": CatTargetDriftMonitor,
     "data_drift": DataDriftMonitor,
     "data_quality": DataQualityMonitor,
     "num_target_drift": NumTargetDriftMonitor,
     "regression_performance": RegressionPerformanceMonitor,
+    "classification_performance": ClassificationPerformanceMonitor,
+    "prob_classification_performance": ProbClassificationPerformanceMonitor,
 }
 
 class MonitoringService:
@@ -83,6 +88,7 @@ class MonitoringService:
     
         self.reference = datasets.references
         self.current = {}
+        self.column_mapping = {}
 
         #data_input = [{"Distance (km)": 26.91, "Average Speed (km/h)": 11.08, "Calories Burned": 1266, "Climb (m)": 98, "Average Heart rate (tpm)":121, 'target':5}, {"Distance (km)": 25.91, "Average Speed (km/h)": 14.08, "Calories Burned": 1276, "Climb (m)": 94, "Average Heart rate (tpm)":126, 'target':6}]
         #production = pd.DataFrame.from_dict(data_input)
@@ -95,6 +101,7 @@ class MonitoringService:
         self.monitoring = ModelMonitoring(
             monitors=[EVIDENTLY_MONITORS_MAPPING[k]() for k in datasets.monitors], options=[]
         )
+        self.column_mapping[datasets.name] = datasets.column_mapping
 
         self.hash = hashlib.sha256(pd.util.hash_pandas_object(self.reference).values).hexdigest()
         self.hash_metric = prometheus_client.Gauge("evidently:reference_dataset_hash", "", labelnames=["hash"])
@@ -138,7 +145,7 @@ class MonitoringService:
         self.next_run_time = datetime.datetime.now() + datetime.timedelta(
             seconds=self.calculation_period_sec
         )
-        self.monitoring.execute(self.reference, current_data)
+        self.monitoring.execute(self.reference, current_data, self.column_mapping[dataset_name])
         self.hash_metric.labels(hash=self.hash).set(1)
 
         for metric, value, labels in self.monitoring.metrics():
@@ -165,6 +172,7 @@ class MonitoringService:
                 logging.error("Value error for metric %s, error: ", metric_key, error)
 
 SERVICE: Optional[MonitoringService] = None
+
 
 @app.before_first_request
 def configure_service():
