@@ -106,8 +106,8 @@ with tab1:
                 df.to_csv(os.path.join("datasets", "request_data.csv"), index=False)
                 logging.info(f"File with request data created.")            
 
-            logging.info("Run run_example.py")
-            os.system("python run_example.py")
+            logging.info("Run scripts/run_example.py")
+            os.system("python scripts/run_example.py")
 
 with tab2:
     st.subheader("Can you monitor from:")
@@ -117,6 +117,6 @@ with tab2:
     st.write(f"Alertmanager - {ALERMANAGER_URL}")
     st.write(f"Grafana - {GRAFANA_URL}")
 
-    st.subheader("To see the Bentlml service:")
+    st.subheader("To see the Bentoml service:")
     
     st.write(f"Bentoml - {BENTOML_URL}")

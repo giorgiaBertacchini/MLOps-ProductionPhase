@@ -5,6 +5,7 @@ import os
 import shutil
 import json
 from typing import Tuple
+import numpy as np
 
 import pandas as pd
 import requests
@@ -24,7 +25,7 @@ def take_datasets():
     #reference_data = pd.read_csv(os.path.join(dataset_path, "DATA.csv"))
     production_data = pd.read_csv(os.path.join(dataset_path, params["file_name_request_data"]))
     #production_data = pd.read_csv(os.path.join(dataset_path, "request_data.csv"))
-
+    
     logging.info("Reference dataset was created with %s rows", reference_data.shape[0])
     logging.info("Production dataset was created with %s rows", production_data.shape[0])
 

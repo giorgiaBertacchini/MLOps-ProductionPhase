@@ -24,6 +24,20 @@ services:
       - back-tier
       - front-tier
 
+  streamlit:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '8501:8501'
+    volumes:
+      #- './data:/usr/src/app/data:delegated'
+      - ./datasets:/app/datasets
+      - ./metrics_app:/usr/src/app/metrics_app
+      - ./scripts:/usr/src/app/scripts
+    networks:
+      - back-tier
+      - front-tier
+
   prometheus:
     image: prom/prometheus
     volumes:

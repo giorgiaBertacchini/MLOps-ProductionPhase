@@ -102,8 +102,8 @@ def send_data_requests():
 
 
 def run_monitoring_html():
-    logging.info("Run metrics_app/monitoring.py")
-    os.system("python metrics_app/monitoring.py")
+    logging.info("Run scripts/monitoring.py")
+    os.system("python scripts/monitoring.py")
 
 def stop_docker_compose():
     logging.info("Run docker compose down")

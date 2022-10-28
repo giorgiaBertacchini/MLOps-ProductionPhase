@@ -58,7 +58,8 @@ def drift_report(reference: pd.DataFrame, current: pd.DataFrame):
     drift_report = Report(metrics=[DataDrift(), NumTargetDrift()])
     drift_report.run(reference_data=reference, current_data=current)
     drift_report.save_html(os.path.join("metrics_app", "templates", "drift_report.html"))
-    #drift_report.save_json("dashboards/drift_report.json")
+    #drift_report.save_json("dashboards/my_drift_report.json")
+    
 
 def data_tests(reference: pd.DataFrame, current: pd.DataFrame):
     logging.info("DataDrift and NumTargetDrift. Drift report.")
