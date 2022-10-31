@@ -71,7 +71,8 @@ services:
     restart: always
 
   bentoml:
-    image: activities_model:x67ftp2tu676xgbm
+    #image: activities_model:wukpro2ynkqztgbm
+    image: activities_model:${TAG}
     ports:
       - "3005:3005"
     networks:
