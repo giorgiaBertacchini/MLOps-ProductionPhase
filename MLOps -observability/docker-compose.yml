@@ -18,6 +18,7 @@ services:
     volumes:
       - ./datasets:/app/datasets
       - ./metrics_app/templates:/app/metrics_app/templates
+      - ./scripts:/app/scripts
     ports:
       - "8085:8085"
     networks:

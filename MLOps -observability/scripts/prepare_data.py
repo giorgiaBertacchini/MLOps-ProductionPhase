@@ -13,6 +13,8 @@ import requests
 dataset_path = "datasets"
 f = open(os.path.join(dataset_path, "params.json"))
 params = json.load(f)
+ff = open(os.path.join(dataset_path, "header_params.json"))
+header_params = json.load(ff)
 
 def setup_logger() -> None:
     logging.basicConfig(
@@ -31,7 +33,7 @@ def take_datasets():
 
     for single in [reference_data, production_data]:
         for column in single.columns:
-            if column not in params["header"]:
+            if column not in header_params["header"]:
                 single.drop(column, axis=1, inplace=True)
 
     logging.info("Save datasets to %s", dataset_path)

@@ -16,6 +16,8 @@ GRAFANA_URL = "http://localhost:3000/"
 
 f = open(os.path.join("datasets", "params.json"))
 params = json.load(f)
+ff = open(os.path.join("datasets", "header_params.json"))
+header_params = json.load(ff)
 
 def new_tag():
     os.system('docker images --filter=reference=activities_model --format "table TAG={{.Tag}}" > tag.txt')
@@ -28,11 +30,13 @@ def new_tag():
             ff.close()
             break
     fp.close()
+    st.success("Update tag.")
 
 def new_reference():
     response = requests.get(
         "http://127.0.0.1:3030/dvc_file"
     )
+    st.write("Get reference, status code: ", response.status_code)
     myFile = open("datasets/DATA.csv.dvc", "w")
     myFile.write(response.text)
     myFile.close()
@@ -44,6 +48,15 @@ def new_reference():
     st.caption("Pull reference dataset from Google Drive successfully.")
     reference = pd.read_csv('datasets/DATA.csv')
     st.write(reference)
+
+def new_header_params():
+    response = requests.get(
+        "http://127.0.0.1:3030/header"
+    )        
+    st.write("Get header params, status code: ", response.status_code)
+    with open(os.path.join("datasets", "header_params.json"), "w") as outfile:
+        outfile.write(response.text)
+
 
 st.title("Production platform")
 
@@ -62,7 +75,7 @@ with tab1:
         df = pd.read_csv(uploaded_file, sep = ",", header = 0,index_col = False)
         st.write(df)
 
-        for usefull_column in params["numerical_features_names"]:
+        for usefull_column in header_params["header"]:
             if usefull_column not in df.columns:
                 st.error('Error. %s column not present.' % usefull_column)
                 flag = False
@@ -98,8 +111,6 @@ with tab1:
                 "http://127.0.0.1:3005/predict",
                 headers={"content-type": "application/json"},
                 data=df_json,
-                #data = '[{"Distance (km)": 26.91, "Example": 43, "Type": "Running", "Average Speed (km/h)": 11.08, "Activity ID": 5, "Date": 6, "Duration": 6, "Calories Burned": 1266, "Climb (m)": 98, "Average Heart rate (tpm)":121, "Distance (km)": 26.91, "Example": 43, "Type": "Running", "Average Speed (km/h)": 11.18, "Activity ID": 5, "Date": 6, "Duration": 5, "Calories Burned": 1296, "Climb (m)": 97, "Average Heart rate (tpm)":121}]'
-                #data = '[{"Date": "2022-01-14", "Activity ID": "1b2f3d34-af23-4956-bd6d-8a08bd56a0d9", "Type": "Walking", "Distance (km)": 4.01, "Duration": "3:34", "Average Speed (km/h)": 10.58, "Calories Burned": 1400, "Climb (m)": 69, "Average Heart rate (tpm)": 118, "Quality": 10}, {"Date": "2022-01-14", "Activity ID": "1b2f3d34-af23-4956-bd6d-8a08bd56a0d9", "Type": "Walking", "Distance (km)": 4.01, "Duration": "3:34", "Average Speed (km/h)": 10.58, "Calories Burned": 1400, "Climb (m)": 79, "Average Heart rate (tpm)": 115, "Quality": 9}]'
             ).text
 
             prediction = prediction.replace("[", "")
@@ -177,13 +188,19 @@ with tab3:
                 "http://127.0.0.1:3030/load_new_data",
                 headers={"content-type": "application/json"},
                 data=df_ref_json,
-            ).text  
+            ).text 
+
+            if (prediction == 'ok'):
+                st.success("Post dataset success.")
 
             logging.info("Update reference dataset.")
             new_reference()
 
             logging.info("Update tag about model.")      
             new_tag()
+
+            logging.info("Update header params.")      
+            new_header_params()
 
             logging.info("End. Complete retrain")
 
@@ -197,7 +214,7 @@ with tab4:
         response = requests.get(
             "http://127.0.0.1:3030/retrain"
         )
-        st.write("status code: ", response.status_code)        
+        st.write("Get retrain, status code: ", response.status_code)        
         logging.info("End Retrain")
 
     st.markdown("""---""")
@@ -210,7 +227,7 @@ with tab4:
         response = requests.get(
             "http://127.0.0.1:3030/bento"
         )
-        st.write("status code: ", response.status_code)        
+        st.write("Get Bento, status code: ", response.status_code)        
         logging.info("End Build Bento")
     
     st.markdown("""---""")
@@ -231,3 +248,13 @@ with tab4:
         logging.info("Search new model tag.")
         new_tag()
         logging.info("End Update Model.")
+
+    st.markdown("""---""")
+
+    st.subheader("Update header parameters?")
+    st.markdown("If you should update the header parameters you need a get.")
+    st.caption("Press the button to update header parameters.")
+    if st.button("Update header parameters"):
+        logging.info("Search header parameters.")
+        new_header_params()        
+        logging.info("End Upadate header parameters.")

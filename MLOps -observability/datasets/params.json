@@ -10,14 +10,6 @@
         "Climb (m)",
         "Average Heart rate (tpm)"
     ],
-    "header": [
-        "Distance (km)",
-        "Average Speed (km/h)" ,
-        "Calories Burned",
-        "Climb (m)",
-        "Average Heart rate (tpm)",
-        "Quality"
-    ],
     "window_size": 500,
     "monitors_name": [
         "cat_target_drift",

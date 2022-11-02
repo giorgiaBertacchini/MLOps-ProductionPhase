@@ -35,6 +35,8 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 #dataset_path = "datasets"
 f = open(os.path.join("datasets", "params.json"))
 params = json.load(f)
+ff = open(os.path.join("datasets", "header_params.json"))
+header_params = json.load(ff)
 
 # Add prometheus wsgi middleware to route /metrics requests
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})
@@ -133,7 +135,7 @@ class MonitoringService:
         current_data['Quality'] = current_data['Quality'].astype('float64')
 
         for column in current_data.columns:
-            if column not in params["header"]:
+            if column not in header_params["header"]:
                 current_data.drop(column, axis=1, inplace=True)
     
         current_data.to_csv(os.path.join("datasets", "current.csv"), index = False)
