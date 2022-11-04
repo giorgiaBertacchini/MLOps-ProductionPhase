@@ -19,17 +19,9 @@ To show all these metrics `Grafana` tool provide a dashboard customizable and re
 
 `DVC` tool is used to download from `Google Drive` the dataset on which ml model is trained.
 
-## Run
-To up and start docker images:
-```
-docker compose up
-```
-In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`.
+## Tools
 
-To run the streamlit app:
-```
-streamlit run .\metrics_app\streamlit_app.py
-```
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/tools.png)
 
 ## Tools & Ports
 
@@ -42,24 +34,38 @@ streamlit run .\metrics_app\streamlit_app.py
 | Grafana | `localhost:3000` |
 | Streamlit App | `localhost:8501` |
 
-Bento:
-`localhost:3005`
 
-Streamlit App:
-`localhost:8501`
+## Schema
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/schema.png)
 
-Evidently Service:
-`localhost:8085`
-`localhost:8085/metrics`
-`localhost:8085/drift_report`
-`localhost:8085/data_stability`
-`localhost:8085/data_drift_tests`
+## Connections
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/comunications.png)
 
-Prometheus:
-`localhost:9090`
+## Run
+To up and start docker images:
+```
+docker compose up
+```
+In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`. Also this command run `bento` image about the ml model.
 
-Grafana:
-`localhost:3000`
+## Streamlit app
+
+To run the streamlit app:
+```
+streamlit run .\metrics_app\streamlit_app.py
+```
+
+From this application the users can:
+
+- require predictions
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Predictions.png)
+
+- find directly link to observation tools
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Monitor.png)
+
+- run to retrain the ml model or run single actions usefull
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_CompleteRetrain.png)
+
 
 ## Changes
 ```
