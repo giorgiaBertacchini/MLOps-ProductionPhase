@@ -13,7 +13,7 @@ from evidently.test_suite import TestSuite
 from evidently.test_preset import DataQuality, DataStability
 from evidently.tests import *
 
-f = open(os.path.join("datasets", "params.json"))
+f = open(os.path.join("parameters", "params.json"))
 params = json.load(f)
 
 def setup_logger():

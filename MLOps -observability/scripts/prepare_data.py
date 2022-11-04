@@ -11,9 +11,9 @@ import pandas as pd
 import requests
 
 dataset_path = "datasets"
-f = open(os.path.join(dataset_path, "params.json"))
+f = open(os.path.join("parameters", "params.json"))
 params = json.load(f)
-ff = open(os.path.join(dataset_path, "header_params.json"))
+ff = open(os.path.join("parameters", "header_params.json"))
 header_params = json.load(ff)
 
 def setup_logger() -> None:

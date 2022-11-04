@@ -49,7 +49,7 @@ def check_dataset(
 def prepare_data():
     dataset_path = "datasets"
     logging.info("Generate test data for dataset.")
-    f = open(os.path.join(dataset_path, "params.json"))
+    f = open(os.path.join("parameters", "params.json"))
     params = json.load(f)
 
     logging.info("Take datasets")

@@ -17,6 +17,7 @@ services:
       - grafana
     volumes:
       - ./datasets:/app/datasets
+      - ./parameters:/app/parameters
       - ./metrics_app/templates:/app/metrics_app/templates
       - ./scripts:/app/scripts
     ports:
@@ -33,6 +34,7 @@ services:
     volumes:
       #- './data:/usr/src/app/data:delegated'
       - ./datasets:/app/datasets
+      - ./parameters:/app/parameters
       - ./metrics_app:/usr/src/app/metrics_app
       - ./scripts:/usr/src/app/scripts
     networks:

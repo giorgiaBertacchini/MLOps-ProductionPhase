@@ -33,9 +33,9 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 #dataset_path = "datasets"
-f = open(os.path.join("datasets", "params.json"))
+f = open(os.path.join("parameters", "params.json"))
 params = json.load(f)
-ff = open(os.path.join("datasets", "header_params.json"))
+ff = open(os.path.join("parameters", "header_params.json"))
 header_params = json.load(ff)
 
 # Add prometheus wsgi middleware to route /metrics requests
@@ -90,6 +90,7 @@ class MonitoringService:
     
         self.reference = datasets.references
         self.current = {}
+        self.current["model_input_table"] = pd.read_csv(os.path.join("datasets", "current.csv"))
         self.column_mapping = {}
 
         #data_input = [{"Distance (km)": 26.91, "Average Speed (km/h)": 11.08, "Calories Burned": 1266, "Climb (m)": 98, "Average Heart rate (tpm)":121, 'target':5}, {"Distance (km)": 25.91, "Average Speed (km/h)": 14.08, "Calories Burned": 1276, "Climb (m)": 94, "Average Heart rate (tpm)":126, 'target':6}]

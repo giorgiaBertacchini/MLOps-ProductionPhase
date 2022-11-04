@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-f = open(os.path.join("datasets", "params.json"))
+f = open(os.path.join("parameters", "params.json"))
 params = json.load(f)
 
 # the encoder helps to convert NumPy types in source data to JSON-compatible types

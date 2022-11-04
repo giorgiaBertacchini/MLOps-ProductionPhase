@@ -14,9 +14,9 @@ PROMETHEUS_URL = "http://localhost:9090/"
 ALERMANAGER_URL = "http://localhost:9093/"
 GRAFANA_URL = "http://localhost:3000/"
 
-f = open(os.path.join("datasets", "params.json"))
+f = open(os.path.join("parameters", "params.json"))
 params = json.load(f)
-ff = open(os.path.join("datasets", "header_params.json"))
+ff = open(os.path.join("parameters", "header_params.json"))
 header_params = json.load(ff)
 
 def new_tag():
@@ -31,6 +31,9 @@ def new_tag():
             break
     fp.close()
     st.success("Update tag.")
+    os.system("docker rm --force mlops-observability-bentoml-1")
+    st.warning("Need to up docker compose, with command:")
+    st.code("docker compose up")
 
 def new_reference():
     response = requests.get(
@@ -54,7 +57,7 @@ def new_header_params():
         "http://127.0.0.1:3030/header"
     )        
     st.write("Get header params, status code: ", response.status_code)
-    with open(os.path.join("datasets", "header_params.json"), "w") as outfile:
+    with open(os.path.join("parameters", "header_params.json"), "w") as outfile:
         outfile.write(response.text)
 
 
@@ -75,7 +78,7 @@ with tab1:
         df = pd.read_csv(uploaded_file, sep = ",", header = 0,index_col = False)
         st.write(df)
 
-        for usefull_column in header_params["header"]:
+        for usefull_column in params["numerical_features_names"]:
             if usefull_column not in df.columns:
                 st.error('Error. %s column not present.' % usefull_column)
                 flag = False
@@ -174,6 +177,7 @@ with tab3:
     st.caption("    - Retrain the model (push dvc dataset, mlflow run, build and dockerize bento),")
     st.caption("    - Update reference dataset in production,")
     st.caption("    - Update model in production (update tag).")
+    st.warning("Attention. This operation can take several minutes.")
 
     new_dataset = st.file_uploader("Choose a file CSV as new reference dataset", type="csv")
     if new_dataset is not None:
@@ -208,7 +212,10 @@ with tab3:
 with tab4:
     st.subheader("Retrain model?")
     st.markdown("If you should retrain the model with the same dataset.")
-    st.caption("Press the button to retrain the model.")
+    st.caption("Press the button to:")
+    st.caption("    - Update dvc dataset in Goggle Drive,")
+    st.caption("    - Retrain model thought mlflow,")
+    st.caption("    - Create bento and dockerize it.")
     if st.button("Retrain only"):
         logging.info("Retrain the model.")
         response = requests.get(
@@ -222,6 +229,7 @@ with tab4:
     st.subheader("Build Bento?")
     st.markdown("If you need new bento, yoou should build and dockerize bento")
     st.caption("Press the button to build and dockerize bento.")
+    st.warning("Attention. This operation can take several minutes.")
     if st.button("Bento"):
         logging.info("Build and dockerize bento.")
         response = requests.get(
