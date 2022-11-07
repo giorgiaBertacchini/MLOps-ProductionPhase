@@ -33,6 +33,7 @@ def new_tag():
     st.success("Update tag.")
     os.system("docker rm --force mlops-observability-bentoml-1")
     st.warning("Need to up docker compose, with command:")
+    st.code("docker compose down")
     st.code("docker compose up")
 
 def new_reference():
