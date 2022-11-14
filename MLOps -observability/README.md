@@ -90,48 +90,49 @@ To run the streamlit app:
 streamlit run .\metrics_app\streamlit_app.py
 ```
 
-From this application the users can:
-
-- require predictions,
-
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Predictions.png)
-
-- find directly link to observation tools,
-
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Monitor.png)
-
-- run to retrain the ml model or run single actions usefull.
-
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_CompleteRetrain.png)
 
 ## Drift and model monitoring
+
+<div align="center">
+  <img width="300" alt="evidently logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/evidently_logo.png">
+</div>
+
 [Evidently](https://www.evidentlyai.com/)
 
 ## Systems monitoring and alerting
+<div align="center">
+  <img width="300" alt="prometheus logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_logo.png">
+</div>
+
 [Prometheus](https://prometheus.io/docs/introduction/overview/)
 
 From this tool the user can make query to receive metrics grouped by it.
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus.png)
-
-From its `/alerts` the user can see the alert active and which is verified.
-
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_alert.png)
 
 ## Alert management
+
+<div align="center">
+  <img width="120" alt="alermanager logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/alermanager_logo.png">
+</div>
+
 [Alermanager](https://prometheus.io/docs/alerting/latest/overview/)
 
-In the next image you can see a example of an alert message sent to a chat Slack.
-
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png)
-
 ## Managed observability platform
+
+<div align="center">
+  <img width="140" alt="grafana logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana_logo.svg.png">
+</div>
+
 [Grafana](https://grafana.com/)
 
 From this tool the users can create own dashboard with graphs personalized.
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana.png)
+## Building application
+<div align="center">
+  <img width="260" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_logo.png">
+</div>
 
+[Streamlit](https://streamlit.io/)
 
 # Bridge
 
@@ -151,5 +152,42 @@ In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `ml
 ## Installation
 
 # Usage
+
+## Streamlit App
+
+From this application the users can:
+
+- require predictions,
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Predictions.png)
+
+- find directly link to observation tools,
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Monitor.png)
+
+- run to retrain the ml model or run single actions usefull.
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_CompleteRetrain.png)
+
+## Prometheus Dashboard
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus.png)
+
+From its `/alerts` the user can see the alert active and which is verified.
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_alert.png)
+
+## AlerManager Dashboard
+
+
+
+In the next image you can see a example of an alert message sent to a chat Slack.
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png)
+
+## Grafana Dashboard
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana.png)
+
+
 
 # Acknowledgments
