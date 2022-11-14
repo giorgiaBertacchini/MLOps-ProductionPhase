@@ -55,7 +55,7 @@ It is think to used during the production, after the setup of machine learning m
 
 ## Built with
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/tools.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/mon_tools.png)
 
 | Tool | Port |
 | --- | --- |
