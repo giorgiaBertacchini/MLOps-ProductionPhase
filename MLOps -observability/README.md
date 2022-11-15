@@ -37,7 +37,13 @@
           <li><a href="#02-guidelines">02 Guidelines</a></li>
         </ul>
         <li><a href="#03-alert-management">03 Alert management</a></li>
-        <li><a href="#04-managed-observability-platform">04 Managed observability platform</a></li>     
+        <ul>
+          <li><a href="#03-guidelines">02 Guidelines</a></li>
+        </ul>
+        <li><a href="#04-managed-observability-platform">04 Managed observability platform</a></li>
+        <ul>
+          <li><a href="#04-guidelines">02 Guidelines</a></li>
+        </ul>
         <li><a href="#05-building-application">04 Building application</a></li>
         <ul>
           <li><a href="#05-structure">05 Structure</a></li>
