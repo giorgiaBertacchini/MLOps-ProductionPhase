@@ -104,7 +104,7 @@ It is think to used during the production, after the setup of machine learning m
 | Tool | Port |
 | --- | --- |
 | Bento | `localhost:3005` |
-| Evidently Service | `localhost:8085` |
+| Service | `localhost:8085` |
 | Prometheus | `localhost:9090` |
 | Alertmanager | `localhost:9093` |
 | Grafana | `localhost:3000` |
@@ -223,9 +223,64 @@ You query the Prometheus time series database for where metrics are stored using
 
 ### 02 Guidelines
 
+`config/prometheus.yml` file with Prometheus configuration. For example with rules source, the alerting destination, and all service that it monitoring.
+
+``` yaml
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - "prometheus_rules.yml"
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets: [ 'alertmanager:9093' ]
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    static_configs:
+         - targets: ['localhost:9090']
+
+  - job_name: 'service'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['evidently_service.:8085']
+
+  - job_name: 'bentoml'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['bentoml.:3005']
+
+  - job_name: 'alertmanager'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['alertmanager.:9093']
+```
+
+
 Alerting with Prometheus is separated into two parts:
 * alerting rules in Prometheus servers send alerts to an Alertmanager,
 * the Alertmanager (see afterwards)
+
+`config/prometheus_rules.yml` file contains all alert rules with they Prometheus generate alerts. Following an example rule in the code.
+
+``` yaml
+- name: alert_rules
+  rules:  
+      - alert: FeaturesDrift
+        expr: evidently:data_drift:n_drifted_features > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Features drifting from (instance {{ $labels.instance }})"
+          description: "The number of feature drifted is {{ $value }}"
+```
 
 ## 03 Alert management
 
@@ -238,6 +293,42 @@ Alerting with Prometheus is separated into two parts:
 [Alermanager](https://prometheus.io/docs/alerting/latest/overview/) manages the alerts and sending out notifications via methods such as email, slack, webhook, telegram.
 
 It takes care of deduplicating, grouping, and routing them to the correct receiver integration. It also takes care of silencing and inhibition of alerts.
+
+### 03 Guidelines
+`config/alertmanager.yml` is where is specified the destination of notifications. In this case is a Slack channel. It contains also the format message sended, throught *title* and *text*.
+
+``` yaml
+route:
+  group_by: [ alertname  ]
+  receiver: slack_notifications
+receivers:   
+    - name: slack_notifications
+      slack_configs:
+      - api_url: 'https://hooks.slack.com/services/****'
+        channel: '#monitoring'
+        send_resolved: true
+        icon_url: https://avatars3.githubusercontent.com/u/3380462
+        title: |-
+          [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
+          {{- if gt (len .CommonLabels) (len .GroupLabels) -}}
+            {{" "}}(
+            {{- with .CommonLabels.Remove .GroupLabels.Names }}
+              {{- range $index, $label := .SortedPairs -}}
+                {{ if $index }}, {{ end }}
+                {{- $label.Name }}="{{ $label.Value -}}"
+              {{- end }}
+            {{- end -}}
+            )
+          {{- end }}
+        text: >-
+          {{ range .Alerts -}}
+          *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+          *Description:* {{ .Annotations.description }}
+          *Details:*
+            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+            {{ end }}
+          {{ end }}
+```
 
 ## 04 Managed observability platform
 
@@ -254,6 +345,25 @@ You use Grafana GUI boards to request metrics from the Prometheus server and ren
 
 From this tool the users can create own dashboard with graphs personalized. Grafana dashboards are easy to setting and very flexible.
 You can also save the dashboards  in json form to export.
+
+
+### 04 Guidelines
+`config/grafana_datasource.yaml` file contain the data sources to show in its dashboard.
+
+``` yaml
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: Prometheus
+    orgId: 1
+
+# list of datasources to insert/update depending
+# what's available in the database
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus.:9090
+```
 
 ## 05 Building application
 <div align="center">
@@ -294,7 +404,7 @@ To up and start docker images:
 ```
 docker compose up
 ```
-In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`. Also this command run `bento` image about the ml model.
+In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`. Also this command run `bento` image about the ml model. You can see the details in `docker-compose.yml`.
 
 
 To run the streamlit app:
