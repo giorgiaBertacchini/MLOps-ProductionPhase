@@ -158,6 +158,8 @@ You use Evidently to calculate the metrics and MLflow to log the results. You ca
 #### Evidently with Grafana and Prometheus
 Evidently provides a metrics calculation layer, Prometheus is used to store the metrics, and Grafana is used to display the dashboards and manage alerts.
 
+[Real-time ML monitoring with Evidently and Grafana](https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service)
+
 <div align="center">
   <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/integration.png">
 </div>
@@ -526,16 +528,62 @@ To up and start docker images:
 ```
 docker compose up
 ```
-In Docker desktop appear these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`. Also this command run `bento` image about the ml model. You can see the details in `docker-compose.yml`.
+In Docker desktop appear/run these images: `prom/prometheus`, `grafana/grafana`, `mlops-observability-evidently_service`, `prom/alertmanager`. Also this command run `bento` image about the ml model. You can see the details in `docker-compose.yml`.
+``` python
+services:
+  evidently_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    [...]
 
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    [...]
+
+  grafana:
+    image: grafana/grafana
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    [...]
+
+  bentoml:
+    image: activities_model:${TAG}
+    ports:
+      - "3005:3005"
+    [...]
+
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    ports:
+      - "9093:9093"
+    [...]
+```
+*Note: in bentoml image is used {TAG}, so it run the latest ml model.*
 
 To run the streamlit app:
 ```
 streamlit run .\metrics_app\streamlit_app.py
 ```
 
+For change the parameters, there is `parameters/params.json`.
+Instead `parameters/header_params.json` is automatically update with the header params of Develop Phase.
+
 ## Prerequisites
+
 ## Installation
+
+The installations are execute through `Dockerfile`:
+``` python
+RUN pip3 install -r requirements.txt
+```
 
 # Usage
 
@@ -572,11 +620,9 @@ In the next image you can see a example of an alert message sent to a chat Slack
   <img width="800" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png">
 </div>
 
-
 ## Grafana Dashboard
 
 ![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana.png)
-
 
 # Acknowledgments
 * [mlebook, chapter 9](https://www.dropbox.com/s/yix71gdh445b6j0/Chapter9.pdf?dl=0)
