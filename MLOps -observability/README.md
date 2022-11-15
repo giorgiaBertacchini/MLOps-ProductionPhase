@@ -73,7 +73,9 @@ It is think to used during the production, after the setup of machine learning m
 
 ## Built with
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/mon_tools.png)
+<div align="center">
+  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/mon_tools.png">
+</div>
 
 | Tool | Port |
 | --- | --- |
@@ -86,7 +88,9 @@ It is think to used during the production, after the setup of machine learning m
 
 ## Schema
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/schema.png)
+<div align="center">
+  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/schema.png">
+</div>
 
 # How it works
 The ML model is a docker image `Bentoml` tool, by Development sector that have train and build the ml model.
@@ -123,6 +127,10 @@ You use Evidently to calculate the metrics and MLflow to log the results. You ca
 
 #### Evidently with Grafana and Prometheus
 Evidently provides a metrics calculation layer, Prometheus is used to store the metrics, and Grafana is used to display the dashboards and manage alerts.
+
+<div align="center">
+  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/integration.png">
+</div>
 
 ### 01 Key Elements
 Evidently has three components: Reports, Tests, and Monitors (in development). 
@@ -185,6 +193,10 @@ You query the Prometheus time series database for where metrics are stored using
 * **Exporters** are optional external programs that ingest data from a variety of sources and convert it to metrics that Prometheus can scrape. 
 * **Alertmanager** to raise alerts based on preset rules.
 
+<div align="center">
+  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_elements.png">
+</div>
+
 ### 02 Guidelines
 
 Alerting with Prometheus is separated into two parts:
@@ -200,7 +212,6 @@ Alerting with Prometheus is separated into two parts:
 :books: *Theory: To alert the data scientist of the change; that person can then diagnose the issue and evaluate the next course of action.*
 
 [Alermanager](https://prometheus.io/docs/alerting/latest/overview/) manages the alerts and sending out notifications via methods such as email, slack, webhook, telegram.
-
 
 ## 04 Managed observability platform
 
@@ -234,7 +245,16 @@ Adding a widget is the same as declaring a variable. No need to write a backend,
 When you're working with data, it is extremely valuable to visualize that data quickly, interactively, and from multiple different angles. 
 You can display data via charts, and you can display it in raw form.
 * Data display elements: DataFrame, Static tables, Metrics, Dicts and JSON.
+
+<div align="center">
+  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_data.png">
+</div>
+
 * Chart elements: Streamlit supports several different charting libraries as Matplotlib. And a few chart types that are "native" to Streamlit, like st.line_chart and st.area_chart
+
+<div align="center">
+  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_chart.png">
+</div>
 
 # Bridge
 
@@ -295,7 +315,6 @@ In the next image you can see a example of an alert message sent to a chat Slack
 ## Grafana Dashboard
 
 ![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana.png)
-
 
 
 # Acknowledgments
