@@ -181,6 +181,100 @@ Evidently has three components: Reports, Tests, and Monitors (in development).
 * Required input: POST live data from the ML service.
 * How you get the output: data and quality metrics in the Prometheus format.
 
+### 01 Guidelines
+
+Evidently needs to be installed:
+```
+pip install evidently
+```
+
+#### Evidently Monitors
+`metrics_app/app.py` implements evidently monitors and the integration with Prometheus. 
+
+``` python
+from evidently.model_monitoring import CatTargetDriftMonitor
+from evidently.model_monitoring import ClassificationPerformanceMonitor
+from evidently.model_monitoring import DataDriftMonitor
+from evidently.model_monitoring import DataQualityMonitor
+from evidently.model_monitoring import ModelMonitoring
+from evidently.model_monitoring import NumTargetDriftMonitor
+from evidently.model_monitoring import ProbClassificationPerformanceMonitor
+from evidently.model_monitoring import RegressionPerformanceMonitor
+from evidently.pipeline.column_mapping import ColumnMapping
+from evidently.runner.loader import DataLoader
+
+EVIDENTLY_MONITORS_MAPPING = {
+    "cat_target_drift": CatTargetDriftMonitor,
+    "data_drift": DataDriftMonitor,
+    "data_quality": DataQualityMonitor,
+    "num_target_drift": NumTargetDriftMonitor,
+    "regression_performance": RegressionPerformanceMonitor,
+    "classification_performance": ClassificationPerformanceMonitor,
+    "prob_classification_performance": ProbClassificationPerformanceMonitor,
+}
+```
+
+#### Evidently Reports And Tests
+
+`scripts/monitoring.py` file implement Evidently tool without the integration with Prometheus and Granafa. So it is not real-time observation and create in output html pages. These output are saved in `metrics_app/templates` folder. If these pages will be usefull can be exported for extern uses.
+
+*Importing*
+``` python
+from evidently.report import Report
+from evidently.metric_preset import DataDrift, NumTargetDrift
+ 
+from evidently.test_suite import TestSuite
+from evidently.test_preset import DataStability
+from evidently.tests import *
+```
+
+*Data Stability*
+``` python
+def data_stability_test(reference: pd.DataFrame, current: pd.DataFrame):
+    logging.info("Data stability test. Test suite.")
+     # A test suite contains several individual tests. Each test compares a specific metric against a defined condition and returns a pass/fail result. 
+    # DataStability run several checks for data quality and integrity
+
+    data_stability = TestSuite(tests=[DataStability(),])
+    data_stability.run(reference_data=reference, current_data=current)
+    data_stability.save_html(os.path.join("metrics_app", "templates", "data_stability.html"))
+```
+
+*Report*
+``` python
+def drift_report(reference: pd.DataFrame, current: pd.DataFrame):
+    logging.info("DataDrift and NumTargetDrift. Drift report.")
+    # Reports calculate various metrics and generate a dashboard with rich visuals.
+
+    drift_report = Report(metrics=[DataDrift(), NumTargetDrift()])
+    drift_report.run(reference_data=reference, current_data=current)
+    drift_report.save_html(os.path.join("metrics_app", "templates", "drift_report.html"))
+```
+
+*Test Suite*
+``` python
+def data_tests(reference: pd.DataFrame, current: pd.DataFrame):
+    logging.info("DataDrift and NumTargetDrift. Drift report.")
+    # Data drift and feature drift
+
+    data_drift_tests = TestSuite(tests=[
+        TestNumberOfColumnsWithNulls(),
+        TestNumberOfRowsWithNulls(),
+        TestNumberOfConstantColumns(),
+        TestNumberOfDuplicatedRows(),
+        TestNumberOfDuplicatedColumns(),
+        TestNumberOfDriftedFeatures(),
+        TestShareOfDriftedFeatures(),
+    ])
+    data_drift_tests.run(reference_data=reference, current_data=current)
+    data_drift_tests.save_html(os.path.join("metrics_app", "templates", "data_drift_tests.html"))
+```
+
+Example of created html pages:
+
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/drift_html.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/report_html.png)
+
 ## 02 Systems monitoring and alerting
 <div align="center">
   <img width="300" alt="prometheus logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_logo.png">
@@ -268,6 +362,20 @@ scrape_configs:
       - targets: ['alertmanager.:9093']
 ```
 
+`metrics_app/app.py`
+
+``` python
+import prometheus_client
+
+# Add prometheus wsgi middleware to route /metrics requests
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})
+```
+``` python
+class MonitoringService:
+    # names of monitoring datasets
+    datasets: LoadedDataset
+    metric: prometheus_client.Gauge
+```
 
 Alerting with Prometheus is separated into two parts:
 * alerting rules in Prometheus servers send alerts to an Alertmanager,
@@ -399,6 +507,12 @@ You can display data via charts, and you can display it in raw form.
 <div align="center">
   <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_chart.png">
 </div>
+
+### 05 Guidelines
+streamlit requires installation:
+```
+pip install streamlit
+```
 
 # Bridge
 
