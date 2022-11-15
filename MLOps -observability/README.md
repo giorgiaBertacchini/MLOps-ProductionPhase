@@ -450,11 +450,14 @@ From its `/alerts` the user can see the alert active and which is verified.
 
 ## AlertManager Dashboard
 
-
+![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/alertmanager.png)
 
 In the next image you can see a example of an alert message sent to a chat Slack. Show a example of chat where Alertmanager send alert, with details.
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png)
+<div align="center">
+  <img width="800" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png">
+</div>
+
 
 ## Grafana Dashboard
 
