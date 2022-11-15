@@ -376,6 +376,8 @@ datasources:
   <img width="260" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_logo.png">
 </div>
 
+:books: *Theory: A drift alert can be followed by a trigger to the Develop phase to retrain and generate a new model.* 
+
 [Streamlit](https://streamlit.io/) is an open-source Python library that facilitates building and deploying shareable web apps in minutes. It turns data scripts into customized, powerful, and shareable data apps. 
 
 Being a production-ready app framework, Streamlit offers the fastest way to build web apps for machine learning models.
@@ -446,7 +448,7 @@ From its `/alerts` the user can see the alert active and which is verified.
 
 ![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_alert.png)
 
-## AlerManager Dashboard
+## AlertManager Dashboard
 
 
 
