@@ -28,6 +28,7 @@
             <li><a href="#reports">Reports</a></li>
             <li><a href="#monitors">Monitors</a></li>
           </ul>
+          <li><a href="#01-guidelines">01 Guidelines</a></li>
         </ul>
         <li><a href="#02-systems-monitoring-and-alerting">02 Systems monitoring and alerting</a></li>        
         <ul>
@@ -44,7 +45,7 @@
         <ul>
           <li><a href="#04-guidelines">02 Guidelines</a></li>
         </ul>
-        <li><a href="#05-building-application">04 Building application</a></li>
+        <li><a href="#05-building-application">05 Building application</a></li>
         <ul>
           <li><a href="#05-structure">05 Structure</a></li>
           <li><a href="#05-key-elements">05 Key Elements</a></li>
