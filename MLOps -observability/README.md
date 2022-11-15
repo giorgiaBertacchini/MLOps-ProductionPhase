@@ -579,3 +579,6 @@ In the next image you can see a example of an alert message sent to a chat Slack
 
 
 # Acknowledgments
+* [mlebook, chapter 9](https://www.dropbox.com/s/yix71gdh445b6j0/Chapter9.pdf?dl=0)
+* [Made With ML](https://madewithml.com/courses/mlops/monitoring/)
+* Book "Introducing MLOps How to Scale Machine Learning in the Enterprise (Mark Treveil, Nicolas Omont, Clément Stenac etc.)", Chapter 7
