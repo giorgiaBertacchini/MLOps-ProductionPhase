@@ -4,6 +4,10 @@
   <ol>
     <li>
       <a href="#mlops-observability">MLOps observability</a>
+      <ul>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#drift-detection">Drift Detection</a></li>
+      </ul>
     </li>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -15,10 +19,30 @@
     <li>
       <a href="#how-it-works">How it works</a></li>
       <ul>
-        <li><a href="#drift-and-model-monitoring">Drift and model monitoring</a></li>
-        <li><a href="#systems-monitoring-and-alerting">Systems monitoring and alerting</a></li>
-        <li><a href="#alert-management">Alert management</a></li>
-        <li><a href="#managed-observability-platform">Managed observability platform</a></li>
+        <li><a href="#01-drift-and-model-monitoring">01 Drift and model monitoring</a></li>
+        <ul>
+          <li><a href="#01-collaboration">01 Collaboration</a></li>
+          <li><a href="#01-key-elements">01 Key Elements</a></li>
+          <ul>
+            <li><a href="#tests">Tests</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#monitors">Monitors</a></li>
+          </ul>
+        </ul>
+        <li><a href="#02-systems-monitoring-and-alerting">02 Systems monitoring and alerting</a></li>        
+        <ul>
+          <li><a href="#02-collaboration">02 Collaboration</a></li>
+          <li><a href="#02-structure">02 Structure</a></li>
+          <li><a href="#02-key-elements">02 Key Elements</a></li>
+          <li><a href="#02-guidelines">02 Guidelines</a></li>
+        </ul>
+        <li><a href="#03-alert-management">03 Alert management</a></li>
+        <li><a href="#04-managed-observability-platform">04 Managed observability platform</a></li>     
+        <li><a href="#05-building-application">04 Building application</a></li>
+        <ul>
+          <li><a href="#05-structure">05 Structure</a></li>
+          <li><a href="#05-key-elements">05 Key Elements</a></li>
+        </ul>
       </ul>
     </li>
     <li>
@@ -212,6 +236,8 @@ Alerting with Prometheus is separated into two parts:
 :books: *Theory: To alert the data scientist of the change; that person can then diagnose the issue and evaluate the next course of action.*
 
 [Alermanager](https://prometheus.io/docs/alerting/latest/overview/) manages the alerts and sending out notifications via methods such as email, slack, webhook, telegram.
+
+It takes care of deduplicating, grouping, and routing them to the correct receiver integration. It also takes care of silencing and inhibition of alerts.
 
 ## 04 Managed observability platform
 
