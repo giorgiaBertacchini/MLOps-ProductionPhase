@@ -11,10 +11,8 @@ import dataclasses
 import flask
 import pandas as pd
 import prometheus_client
-import yaml
 from flask import Flask, render_template
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from sklearn.ensemble import RandomForestRegressor
 
 from evidently.model_monitoring import CatTargetDriftMonitor
 from evidently.model_monitoring import ClassificationPerformanceMonitor
@@ -26,7 +24,6 @@ from evidently.model_monitoring import ProbClassificationPerformanceMonitor
 from evidently.model_monitoring import RegressionPerformanceMonitor
 from evidently.pipeline.column_mapping import ColumnMapping
 from evidently.runner.loader import DataLoader
-from evidently.runner.loader import DataOptions
 
 
 app = Flask(__name__)
@@ -80,23 +77,11 @@ class MonitoringService:
     window_size: int
 
     def __init__(self, datasets: LoadedDataset, window_size: int):
-        target = "Quality"
-        #numerical_features = numerical_features_names
-        #features = numerical_features
-        #model = RandomForestRegressor(random_state=0)
-        #model.fit(datasets.references[features], datasets.references[target])
-        # DA AGGIUNGERE LA SEGUENTE
-        #datasets.references["prediction"] = model.predict(datasets.references[features])
-    
+        target = "Quality"    
         self.reference = datasets.references
         self.current = {}
         self.current["model_input_table"] = pd.read_csv(os.path.join("datasets", "current.csv"))
         self.column_mapping = {}
-
-        #data_input = [{"Distance (km)": 26.91, "Average Speed (km/h)": 11.08, "Calories Burned": 1266, "Climb (m)": 98, "Average Heart rate (tpm)":121, 'target':5}, {"Distance (km)": 25.91, "Average Speed (km/h)": 14.08, "Calories Burned": 1276, "Climb (m)": 94, "Average Heart rate (tpm)":126, 'target':6}]
-        #production = pd.DataFrame.from_dict(data_input)
-        #production["prediction"] = model.predict(production[features])
-        #self.current[] = production
 
         self.window_size = window_size
         self.metrics = {}
@@ -139,11 +124,7 @@ class MonitoringService:
             if column not in header_params["header"]:
                 current_data.drop(column, axis=1, inplace=True)
     
-        current_data.to_csv(os.path.join("datasets", "current.csv"), index = False)
-
-        #if current_size < self.min_window_size:
-        #    logging.info(f"Not enough data for measurement: {current_size} of {self.min_window_size}." f" Waiting more data")
-        #    return     
+        current_data.to_csv(os.path.join("datasets", "current.csv"), index = False)  
 
         self.next_run_time = datetime.datetime.now() + datetime.timedelta(
             seconds=self.calculation_period_sec
@@ -192,13 +173,8 @@ def configure_service():
     loader = DataLoader()
 
     logging.info(f"Load reference data")
-    #reference_path = os.path.join("datasets", "model_input_table.csv")
     reference_path = os.path.join("datasets", params["file_name_training_data_clean"])
 
-    #reference_data = loader.load(
-    #    reference_path, 
-    #    DataOptions(separator=',', header=True,),
-    #)
     reference_data = pd.read_csv(reference_path, parse_dates=True)
     datasets = LoadedDataset(
         name = 'model_input_table',
@@ -213,9 +189,7 @@ def configure_service():
 
 @app.route("/")
 def home():
-    #return render_template(os.path.join("datasets", "drift_report.html"))
     return render_template("request_page.html")
-    #return "<p>Hello, World!</p>"
 
 @app.route("/drift_report")
 def drift_report():

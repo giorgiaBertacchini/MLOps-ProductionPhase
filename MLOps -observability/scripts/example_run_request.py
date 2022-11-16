@@ -31,7 +31,6 @@ def send_data_row(dataset_name: str, data: Dict) -> None:
 
     try:
         response = requests.post(
-            #f"http://localhost:8085/iterate/{dataset_name}",
             f"http://localhost:8085/iterate",
             data=json.dumps([data], cls=NumpyEncoder),
             headers={"content-type": "application/json"},
@@ -62,8 +61,6 @@ def main(sleep_timeout: int) -> None:
     max_index = 0
     dataset_name = 'production_dataset'
 
-    #for dataset_name in os.listdir(datasets_path):
-        #production_data_path = os.path.join(datasets_path, "production.csv")
     new_data = pd.read_csv(os.path.join(datasets_path, params["file_name_request_data_clean"]))
 
 

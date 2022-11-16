@@ -3,10 +3,7 @@ import logging
 import requests
 import streamlit as st
 import pandas as pd
-import math
 import os
-import subprocess
-#import webbrowser
 
 BENTOML_URL = "http://localhost:3005/"
 EVIDENTLY_URL = "http://localhost:8085/"
@@ -92,16 +89,8 @@ with tab1:
             df['Average Heart rate (tpm)'] = df['Average Heart rate (tpm)'].astype('int64')
             row_number = df.shape[0]
 
-            #df.to_json("p.json", orient = "records", date_format = "epoch", date_unit = "ms", default_handler = None)
             df_json = df.to_json (orient = "records", default_handler = None)
 
-        #f = open('p.json')
-        #data = json.load(f)
-        # Convert JSON to String
-        #y = json.dumps(data)
-    #if st.button("evidently"):
-        #os.system("start ./metrics_app/templates/data_drift_tests.html")    
-        #webbrowser.open('file:///C:/Users/giorg/Documents/GitHub/MLOps/MLOps -observability/metrics_app/templates/data_drift_tests.html')
 
     if st.button("Predict"):
         if uploaded_file is None:
@@ -134,7 +123,6 @@ with tab1:
                     with col2:
                         st.metric(label="Prediction", value=row)
 
-                    #li[count] = math.trunc(int(float(row)))
                     li[count] = float("{:.3f}".format(float(row)))
                     count += 1
                     st.markdown("""---""")
@@ -146,7 +134,6 @@ with tab1:
                 df['Quality'] = df['Quality'].astype('float64')
                 st.write(df)
 
-                #df.to_csv(os.path.join("datasets", params["file_name_request_data"]), index=False)
                 df.to_csv(os.path.join("datasets", "request_data.csv"), index=False)
                 logging.info(f"File with request data created.")            
 

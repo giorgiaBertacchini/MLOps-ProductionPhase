@@ -41,10 +41,7 @@ def check_dataset(
 
     logging.info("Download dataset %s", dataset_name)
 
-    #return prepare_data()
-    #run_script(cmd=["scripts/prepare_datasets.py"], wait=True)
     os.system("python scripts/prepare_data.py")
-    #run_script(cmd=["scripts/prepare_data.py"], wait=True)
 
 def prepare_data():
     dataset_path = "datasets"
@@ -118,10 +115,8 @@ def main(force: bool):
     setup_logger()
     check_docker_installation()
     download_test_datasets(force=force)
-    #run_docker_compose()
     send_data_requests()
     run_monitoring_html()
-    #run_streamlit()
     logging.info("Terminate. Attend next request...")
 
 

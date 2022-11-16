@@ -32,7 +32,6 @@ services:
     ports:
       - '8501:8501'
     volumes:
-      #- './data:/usr/src/app/data:delegated'
       - ./datasets:/app/datasets
       - ./parameters:/app/parameters
       - ./metrics_app:/usr/src/app/metrics_app
@@ -74,7 +73,6 @@ services:
     restart: always
 
   bentoml:
-    #image: activities_model:wukpro2ynkqztgbm
     image: activities_model:${TAG}
     ports:
       - "3005:3005"

@@ -1,14 +1,7 @@
-import argparse
-import io
 import logging
 import os
-import shutil
 import json
-from typing import Tuple
-import numpy as np
-
 import pandas as pd
-import requests
 
 dataset_path = "datasets"
 f = open(os.path.join("parameters", "params.json"))
@@ -24,9 +17,7 @@ def setup_logger() -> None:
 def take_datasets():
     logging.info("Take datasets")
     reference_data = pd.read_csv(os.path.join(dataset_path, params["file_name_training_data"]))
-    #reference_data = pd.read_csv(os.path.join(dataset_path, "DATA.csv"))
     production_data = pd.read_csv(os.path.join(dataset_path, params["file_name_request_data"]))
-    #production_data = pd.read_csv(os.path.join(dataset_path, "request_data.csv"))
     
     logging.info("Reference dataset was created with %s rows", reference_data.shape[0])
     logging.info("Production dataset was created with %s rows", production_data.shape[0])
