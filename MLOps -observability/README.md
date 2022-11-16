@@ -594,6 +594,11 @@ The installations are execute through `Dockerfile`:
 RUN pip3 install -r requirements.txt
 ```
 
+To run streamlit app. it is necessary:
+```
+pip install streamlit
+```
+
 # Usage
 
 ## Streamlit App
