@@ -533,6 +533,11 @@ pip install streamlit
 
 ## Getting Started
 
+To run the streamlit app:
+```
+streamlit run .\metrics_app\streamlit_app.py
+```
+
 To up and start docker images:
 ```
 docker compose up
@@ -577,10 +582,17 @@ services:
 ```
 *Note: in bentoml image is used {TAG}, so it run the latest ml model.*
 
-To run the streamlit app:
-```
-streamlit run .\metrics_app\streamlit_app.py
-```
+But for the first time, before:
+1. you need to update TAG as environment variable, to have the latest built model.
+    * From streamlit app, in the fourth tab "Single actinos" there is the button "Update model in monitoring sector?" to update the model that is the TAG.
+2. you need to specify your destination of notifications.
+    * In `config/alermanager.yml` file:
+      ``` yaml
+      slack_configs:
+      - api_url: ****
+        channel: '#monitoring'
+      ```
+      
 
 For change the parameters, there is `parameters/params.json`.
 Instead `parameters/header_params.json` is automatically update with the header params of Develop Phase.
