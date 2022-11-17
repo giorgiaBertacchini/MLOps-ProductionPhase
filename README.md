@@ -529,6 +529,10 @@ pip install streamlit
 
 ## Interactions And Communication
 
+To connect the two phases, two applications were created, one on the Develop side of the Flask type, which responds to requests; and one on the Production side made with the Streamlit tool that allows requests to be made to the opposite side.
+
+Two more items are needed for the Production side, so the training dataset used and the machine learning model in Bento format. For sharing these two is done directly from the two platforms Google Drive and Docker, respectively, where they were previously saved from the Develop side.
+
 ![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/comunications.png)
 
 ## Getting Started
