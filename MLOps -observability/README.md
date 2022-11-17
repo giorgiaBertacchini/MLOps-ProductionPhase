@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <img width="200" alt="logo" src="https://github.com/giorgiaBertacchini/MLOps-kedro-auto/blob/experiment-finally/img_readme/logo.png">
+  <img width="200" alt="logo" src="https://github.com/giorgiaBertacchini/MLOps-DevelopPhase/blob/main/img_readme/logo.png">
   <h1 align="center">MLOps</h1>
   <h3 align="center">To automate and encourage machine learning in enterprises!</h3>
 </div>
@@ -113,7 +113,7 @@ It is think to used during the production, after the setup of machine learning m
 ## Built with
 
 <div align="center">
-  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/mon_tools.png">
+  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/mon_tools.png">
 </div>
 
 | Tool | Port |
@@ -128,7 +128,7 @@ It is think to used during the production, after the setup of machine learning m
 ## Schema
 
 <div align="center">
-  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/schema.png">
+  <img width="700" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/schema.png">
 </div>
 
 # How it works
@@ -147,7 +147,7 @@ To show all these metrics `Grafana` tool provide a dashboard customizable and re
 ## 01 Drift and model monitoring
 
 <div align="center">
-  <img width="300" alt="evidently logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/evidently_logo.png">
+  <img width="300" alt="evidently logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/evidently_logo.png">
 </div>
 
 :books: *Theory: The logic is that if the data distribution (e.g., mean, standard deviation, correlations between features) diverges between the training and testing phases on one side and the development phase on the other, it is a strong signal that the model’s performance won’t be the same.*
@@ -170,7 +170,7 @@ Evidently provides a metrics calculation layer, Prometheus is used to store the 
 [Real-time ML monitoring with Evidently and Grafana](https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service)
 
 <div align="center">
-  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/integration.png">
+  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/integration.png">
 </div>
 
 ### 01 Key Elements
@@ -283,12 +283,12 @@ def data_tests(reference: pd.DataFrame, current: pd.DataFrame):
 
 Example of created html pages:
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/drift_html.png)
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/report_html.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/drift_html.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/report_html.png)
 
 ## 02 Systems monitoring and alerting
 <div align="center">
-  <img width="300" alt="prometheus logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_logo.png">
+  <img width="300" alt="prometheus logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/prometheus_logo.png">
 </div>
 
 :books: *Theory: Monitoring models need to collect metrics and to quere on they.*
@@ -329,7 +329,7 @@ You query the Prometheus time series database for where metrics are stored using
 * **Alertmanager** to raise alerts based on preset rules.
 
 <div align="center">
-  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_elements.png">
+  <img width="650" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/prometheus_elements.png">
 </div>
 
 ### 02 Guidelines
@@ -410,7 +410,7 @@ Alerting with Prometheus is separated into two parts:
 ## 03 Alert management
 
 <div align="center">
-  <img width="120" alt="alermanager logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/alermanager_logo.png">
+  <img width="120" alt="alermanager logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/alermanager_logo.png">
 </div>
 
 :books: *Theory: To alert the data scientist of the change; that person can then diagnose the issue and evaluate the next course of action.*
@@ -458,7 +458,7 @@ receivers:
 ## 04 Managed observability platform
 
 <div align="center">
-  <img width="140" alt="grafana logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana_logo.svg.png">
+  <img width="140" alt="grafana logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/grafana_logo.svg.png">
 </div>
 
 :books: *Theory: Model monitoring: The model predictive performance is monitored to potentially invoke a new iteration in the ML process.*
@@ -492,7 +492,7 @@ datasources:
 
 ## 05 Building application
 <div align="center">
-  <img width="260" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_logo.png">
+  <img width="260" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_logo.png">
 </div>
 
 :books: *Theory: A drift alert can be followed by a trigger to the Develop phase to retrain and generate a new model.* 
@@ -510,13 +510,13 @@ You can display data via charts, and you can display it in raw form.
 * Data display elements: DataFrame, Static tables, Metrics, Dicts and JSON.
 
 <div align="center">
-  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_data.png">
+  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_data.png">
 </div>
 
 * Chart elements: Streamlit supports several different charting libraries as Matplotlib. And a few chart types that are "native" to Streamlit, like st.line_chart and st.area_chart
 
 <div align="center">
-  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_chart.png">
+  <img width="680" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_chart.png">
 </div>
 
 ### 05 Guidelines
@@ -529,7 +529,7 @@ pip install streamlit
 
 ## Interactions And Communication
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/comunications.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/comunications.png)
 
 ## Getting Started
 
@@ -607,36 +607,36 @@ From this application the users can:
 
 - require predictions,
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Predictions.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_Predictions.png)
 
 - find directly link to observation tools,
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_Monitor.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_Monitor.png)
 
 - run to retrain the ml model or run single actions usefull.
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/streamlit_CompleteRetrain.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/streamlit_CompleteRetrain.png)
 
 ## Prometheus Dashboard
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/prometheus.png)
 
 From its `/alerts` the user can see the alert active and which is verified.
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/prometheus_alert.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/prometheus_alert.png)
 
 ## AlertManager Dashboard
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/alertmanager.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/alertmanager.png)
 
 In the next image you can see a example of an alert message sent to a chat Slack. Show a example of chat where Alertmanager send alert, with details.
 
 <div align="center">
-  <img width="800" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/chatSlack.png">
+  <img width="800" alt="streamlit logo" src="https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/chatSlack.png">
 </div>
 
 ## Grafana Dashboard
 
-![This is an image](https://github.com/giorgiaBertacchini/MLOps/blob/main/MLOps%20-observability/img_readme/grafana.png)
+![This is an image](https://github.com/giorgiaBertacchini/MLOps-ProductionPhase-Slide/blob/main/MLOps%20-observability/img_readme/grafana.png)
 
 # Acknowledgments
 * [mlebook, chapter 9](https://www.dropbox.com/s/yix71gdh445b6j0/Chapter9.pdf?dl=0)
