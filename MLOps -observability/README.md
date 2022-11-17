@@ -582,6 +582,7 @@ services:
 ```
 *Note: in bentoml image is used {TAG}, so it run the latest ml model.*
 
+### First time
 But for the first time, before:
 1. you need to update TAG as environment variable, to have the latest built model.
     * From streamlit app, in the fourth tab "Single actinos" there is the button "Update model in monitoring sector?" to update the model that is the TAG.
@@ -593,7 +594,7 @@ But for the first time, before:
         channel: '#monitoring'
       ```
       
-
+### Parameters
 For change the parameters, there is `parameters/params.json`.
 Instead `parameters/header_params.json` is automatically update with the header params of Develop Phase.
 
