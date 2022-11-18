@@ -47,16 +47,17 @@
         </ul>
         <li><a href="#03-alert-management">03 Alert management</a></li>
         <ul>
-          <li><a href="#03-guidelines">02 Guidelines</a></li>
+          <li><a href="#03-guidelines">03 Guidelines</a></li>
         </ul>
         <li><a href="#04-managed-observability-platform">04 Managed observability platform</a></li>
         <ul>
-          <li><a href="#04-guidelines">02 Guidelines</a></li>
+          <li><a href="#04-guidelines">04 Guidelines</a></li>
         </ul>
         <li><a href="#05-building-application">05 Building application</a></li>
         <ul>
           <li><a href="#05-structure">05 Structure</a></li>
           <li><a href="#05-key-elements">05 Key Elements</a></li>
+          <li><a href="#05-guidelines">05 Key Guidelines</a></li>
         </ul>
       </ul>
     </li>
@@ -75,6 +76,12 @@
     </li>
     <li>
       <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#streamlit-app">Streamlit App</a></li>
+        <li><a href="#prometheus-dashboard">Prometheus Dashboard</a></li>
+        <li><a href="#alertmanager-dashboard">AlertManager Dashboard</a></li>
+        <li><a href="#grafana-dashboard">Grafana Dashboard</a></li>
+      </ul>
     </li>
     <li>
       <a href="#acknowledgments">Acknowledgments</a>
